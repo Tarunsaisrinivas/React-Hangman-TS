@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import words from './wordList.json';
 import { HangmanDrawing } from "./components/HangmanDrawing";
 import { HangmanWord } from "./components/HangmanWord";
