@@ -34,16 +34,16 @@ const App = () => {
     };
   }, []);
   return (
-    <div className="max-w-2xl flex flex-col gap-2 items-center m-auto">
+    <div className="max-w-2xl  flex flex-col gap-2 items-center m-auto">
       <div className="text-2xl text-center">
-        {/* need with stylings */}
+        
 
         {isWinner && (
-          <span className="text-green-900 animate-pulse">
+          <span className="text-green-800">
             Winner 🥳 - Refresh to try again
           </span>
         )}
-        {isLoser && (<span className="text-red-500 animate-pulse">
+        {isLoser && (<span className="text-red-600">
           Nice Try - Refresh to try again (the word was {wordToGuess})
         </span>)}
       </div>
