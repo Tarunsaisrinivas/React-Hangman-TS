@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import words from './wordList.json';
+import words from "./wordList.json";
 import { HangmanDrawing } from "./components/HangmanDrawing";
 import { HangmanWord } from "./components/HangmanWord";
 import { Keyboard } from "./components/Keyboard";
@@ -13,7 +13,10 @@ const App = () => {
   const incorrectLetters = guessLetter.filter(
     (letter) => !wordToGuess.includes(letter)
   );
-  
+  const isLoser = incorrectLetters.length >= 6;
+  const isWinner = wordToGuess
+    .split("")
+    .every((letter) => guessLetter.includes(letter));
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -22,9 +25,7 @@ const App = () => {
 
       e.preventDefault();
       setGuessLetter((currentLetters) =>
-        currentLetters.includes(key)
-          ? currentLetters
-          : [...currentLetters, key]
+        currentLetters.includes(key) ? currentLetters : [...currentLetters, key]
       );
     };
     document.addEventListener("keypress", handler);
@@ -34,7 +35,18 @@ const App = () => {
   }, []);
   return (
     <div className="max-w-2xl flex flex-col gap-2 items-center m-auto">
-      <div className="text-2xl text-center">Lose Win</div>
+      <div className="text-2xl text-center">
+        {/* need with stylings */}
+
+        {isWinner && (
+          <span className="text-green-900 animate-pulse">
+            Winner 🥳 - Refresh to try again
+          </span>
+        )}
+        {isLoser && (<span className="text-red-500 animate-pulse">
+          Nice Try - Refresh to try again (the word was {wordToGuess})
+        </span>)}
+      </div>
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
       <HangmanWord guessedLetter={guessLetter} wordToGuess={wordToGuess} />
       <Keyboard
@@ -47,7 +59,6 @@ const App = () => {
           );
         }}
       />
-
     </div>
   );
 };
