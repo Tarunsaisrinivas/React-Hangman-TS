@@ -9,7 +9,7 @@ const App = () => {
     return randomWord;
   });
   const [guessLetter, setGuessLetter] = useState<string[]>([]);
-  console.log(wordToGuess);
+  console.log(wordToGuess,setWordToGuess);
   const incorrectLetters = guessLetter.filter(
     (letter) => !wordToGuess.includes(letter)
   );
